@@ -10,7 +10,6 @@ import com.domicilioFiscal.df.Services.InterfaceServices.IntNotificationServices
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +39,7 @@ public class ImpNotificationController implements IntNotificationController {
 
     private final FileServices fileServices;
 
-    @Operation(summary = "Elimina la notificacion por Id", description = "Retorna un booleano")
+    //@Operation(summary = "Elimina la notificacion por Id", description = "Retorna un booleano")
     @DeleteMapping(value = "/delete-by/{id}")
     public ResponseEntity DeleteById(@PathVariable("id") @Positive long id) {
 
@@ -49,7 +48,7 @@ public class ImpNotificationController implements IntNotificationController {
         return ResponseEntity.ok(intNotificationServices.deletNoficationById(id));
     }
 
-    @Operation(summary = "Agrega una notificacion con pdf", description = "Retorna un Mensaje")
+    //@Operation(summary = "Agrega una notificacion con pdf", description = "Retorna un Mensaje")
     @PostMapping(value = "/add-notification")
     public ResponseEntity<String> AddNotification(@RequestParam("files") MultipartFile files, @RequestParam("jsonData") String jsonData) throws JsonProcessingException {
 
@@ -122,7 +121,7 @@ public class ImpNotificationController implements IntNotificationController {
 
     }
 
-    @Operation(summary = "Agrega archivos sin notificacion.", description = "Retorna una mensaje de subido o no el archivo")
+    //@Operation(summary = "Agrega archivos sin notificacion.", description = "Retorna una mensaje de subido o no el archivo")
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFiles(@RequestParam("files") MultipartFile files) throws Exception {
 
@@ -142,7 +141,7 @@ public class ImpNotificationController implements IntNotificationController {
 
     }
 
-    @Operation(summary = "Muestra el p  df.", description = "Retorna el pdf para descargar")
+    //@Operation(summary = "Muestra el p  df.", description = "Retorna el pdf para descargar")
     @GetMapping("/{filename:.+}")
     public ResponseEntity<Resource> getFile(@PathVariable String filename) throws Exception {
 
@@ -154,7 +153,7 @@ public class ImpNotificationController implements IntNotificationController {
     }
 
     @Override
-    @Operation(summary = "Listar todas las notificaciones", description = "Retorna todas las notificacion")
+    //@Operation(summary = "Listar todas las notificaciones", description = "Retorna todas las notificacion")
     @CrossOrigin(origins = "*") // Configura el origen permitido
     @GetMapping(value = "/to-list")
     public ResponseEntity<List<NotificationGet>> GetAllNotification() {
@@ -162,7 +161,7 @@ public class ImpNotificationController implements IntNotificationController {
         return ResponseEntity.ok(intNotificationServices.getNotification().stream().map(x -> modelMapper.map(x, NotificationGet.class)).toList());
     }
 
-    @Operation(summary = "Busca la notificaciones por Cuit", description = "Retorna una notificacion por cuit")
+    //@Operation(summary = "Busca la notificaciones por Cuit", description = "Retorna una notificacion por cuit")
     @GetMapping(value = "/to-list-by/{cuit}")
     public ResponseEntity<List<NotificationGet>> getAllnotificationbyCuit(@PathVariable("cuit") @Positive @Size(min = 10, max = 10) int cuit) {
         log.info(("[NotificationController - to-list-by-cuit: cuit={}]"), cuit);
@@ -172,7 +171,7 @@ public class ImpNotificationController implements IntNotificationController {
 
     //@Size(min = 10, max = 10)
 //    @CrossOrigin(origins = "http://172.20.254.136:5173")
-    @Operation(summary = "Notifica como leida la notificacion", description = "Retorna un boolean = true por el momento")
+    //@Operation(summary = "Notifica como leida la notificacion", description = "Retorna un boolean = true por el momento")
     @PutMapping(value = "/notificated/{id}")
     public ResponseEntity<Boolean> modifyNotificationbyCuit(@PathVariable @Positive Long id) {
 
