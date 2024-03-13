@@ -206,7 +206,7 @@ agent any
 
                     sh "docker build -t ${IDENTIFICADOR_IMAGEN} ."
 
-                    sh "docker run --network estaciones_my-network-login -d -p ${PUERTO_EXTERNO}:${PUERTO_INTERNO} --name ${NOMBRE_CONTENEDOR} ${IDENTIFICADOR_IMAGEN}"
+                    sh "docker run --network estaciones_my-network -d -p ${PUERTO_EXTERNO}:${PUERTO_INTERNO} --name ${NOMBRE_CONTENEDOR} ${IDENTIFICADOR_IMAGEN}"
 
                 }
 
