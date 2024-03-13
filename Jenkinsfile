@@ -188,6 +188,7 @@ agent any
 
                     // Revisar si existe un contenedor con el mismo nombre
 
+                    /*
                     
                     def contenedorExistente = sh(script: "docker ps -aqf name=${NOMBRE_CONTENEDOR}", returnStdout: true).trim()
 
@@ -201,7 +202,7 @@ agent any
                         sh "docker rm -f $contenedorExistente"
                     }
 
-                    
+                    */
 
                     sh "docker build -t ${IDENTIFICADOR_IMAGEN} ."
 
